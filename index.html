@@ -1,1 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MovieVerse — Movie Recommendation System</title>
+<link rel="stylesheet" href="style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
 
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-left">
+      <div class="logo">Cine<span>Verse</span></div>
+      <nav class="nav-links">
+        <a href="#trending" class="nav-link active">Home</a>
+        <a href="#toprated" class="nav-link">Top Rated</a>
+        <a href="#latest" class="nav-link">New</a>
+        <a href="#recommend" class="nav-link">For You</a>
+        <a href="#watchlist" class="nav-link">My List</a>
+      </nav>
+    </div>
+    <div class="nav-right">
+      <div class="search-box">
+        <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 1 0-.7.7l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0A4.5 4.5 0 1 1 14 9.5 4.5 4.5 0 0 1 9.5 14z"/></svg>
+        <input type="text" id="searchInput" placeholder="Search movies by title...">
+      </div>
+      <button class="watchlist-btn" id="watchlistNavBtn" title="My Watchlist">
+        ♥ <span id="watchlistCount">0</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <p class="hero-eyebrow">B.TECH AIML MINI PROJECT</p>
+      <h1 class="hero-title">Find your next <span>obsession.</span></h1>
+      <p class="hero-sub">Discover movies across Telugu, Hindi, Tamil, Korean, Japanese, English and more — filtered, ranked and recommended just for you.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" id="exploreBtn">Explore Movies</button>
+        <button class="btn-secondary" id="surpriseBtn">🎲 Surprise Me</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FILTER BAR ===================== -->
+  <section class="filters-section" id="filters">
+    <div class="filters-row">
+
+      <div class="filter-group">
+        <label>Language</label>
+        <select id="languageFilter">
+          <option value="all">All Languages</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Genre</label>
+        <select id="genreFilter">
+          <option value="all">All Genres</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Min Rating</label>
+        <select id="ratingFilter">
+          <option value="0">Any Rating</option>
+          <option value="9">9+ ⭐</option>
+          <option value="8">8+ ⭐</option>
+          <option value="7">7+ ⭐</option>
+          <option value="6">6+ ⭐</option>
+        </select>
+      </div>
+
+      <div class="filter-group">
+        <label>Sort By</label>
+        <select id="sortFilter">
+          <option value="default">Default</option>
+          <option value="rating-desc">Highest Rating</option>
+          <option value="rating-asc">Lowest Rating</option>
+          <option value="az">A - Z</option>
+          <option value="newest">Newest Release</option>
+        </select>
+      </div>
+
+      <button class="btn-clear" id="clearFiltersBtn">Clear Filters</button>
+    </div>
+    <p class="results-count" id="resultsCount"></p>
+  </section>
+
+  <!-- ===================== FILTERED RESULTS GRID ===================== -->
+  <section class="movie-section" id="resultsSection">
+    <h2 class="section-title">Browse Results</h2>
+    <div class="movie-grid" id="resultsGrid"></div>
+  </section>
+
+  <!-- ===================== RECOMMENDATION SECTION ===================== -->
+  <section class="movie-section recommend-section" id="recommend">
+    <h2 class="section-title">🎯 Recommended For You</h2>
+    <p class="section-sub" id="recommendSub">Based on your selected language &amp; genre filters</p>
+    <div class="movie-row" id="recommendRow"></div>
+  </section>
+
+  <!-- ===================== TRENDING ===================== -->
+  <section class="movie-section" id="trending">
+    <h2 class="section-title">🔥 Trending Movies</h2>
+    <div class="movie-row" id="trendingRow"></div>
+  </section>
+
+  <!-- ===================== TOP RATED ===================== -->
+  <section class="movie-section" id="toprated">
+    <h2 class="section-title">⭐ Top Rated Movies</h2>
+    <div class="movie-row" id="topRatedRow"></div>
+  </section>
+
+  <!-- ===================== LATEST ===================== -->
+  <section class="movie-section" id="latest">
+    <h2 class="section-title">🆕 Latest Releases</h2>
+    <div class="movie-row" id="latestRow"></div>
+  </section>
+
+  <!-- ===================== WATCHLIST ===================== -->
+  <section class="movie-section" id="watchlist">
+    <h2 class="section-title">💖 My Watchlist</h2>
+    <p class="section-sub" id="watchlistSub">Movies you've saved, stored locally in your browser</p>
+    <div class="movie-grid" id="watchlistGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <p>CineVerse — Movie Recommendation System | Built with HTML, CSS &amp; JavaScript | B.Tech AIML Mini Project</p>
+  </footer>
+
+  <!-- ===================== MOVIE DETAILS MODAL ===================== -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+      <button class="modal-close" id="modalClose">&times;</button>
+      <div class="modal-content" id="modalContent"></div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast"></div>
+
+  <script src="movies_data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
