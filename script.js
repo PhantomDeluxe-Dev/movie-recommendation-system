@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CineVerse — Movie Recommendation System
+   MovieVerse — Movie Recommendation System
    Pure vanilla JavaScript. Relies on MOVIES_DB from movies_data.js
    ========================================================================== */
 
@@ -289,7 +289,7 @@ function renderHomeSections() {
 
 function renderWatchlistSection() {
   const movies = state.watchlist.map(getMovieById).filter(Boolean);
-  renderMoviesInto(watchlistGrid, movies, "Your watchlist is empty. Click the ♡ icon on any movie to save it here!");
+  renderMoviesInto(watchlistGrid, movies, "");
 }
 
 /* ---------------------------------------------------------------------- *
